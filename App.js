@@ -15,8 +15,8 @@ class App extends React.Component {
             backgroundColor: {r: 0, g: 0, b: 0, a: 0},
             height: 400,
             width: 400,
-            backgroundMode: 'image',
-            backgroundSrc: '/images/milky-way-2695569-1920.jpg'
+            backgroundMode: 'video',
+            backgroundSrc: '/images/octagon-5192.mp4'
         };
         this.videoRef = React.createRef();
         this.canvasRef = React.createRef();
@@ -182,7 +182,13 @@ class App extends React.Component {
     }
 
     async componentDidMount() {
+        const { backgroundRef } = this;
+        const { backgroundMode } = this.state;
         await this.setupApp();
+
+        if (backgroundMode === 'video' && backgroundRef.current) {
+            backgroundRef.current.play();
+        }
     }
 
     render() {
